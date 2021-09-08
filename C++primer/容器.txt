@@ -1,0 +1,10 @@
+#include <vector>	using std::vector
+类模板	vector<type> v;
+1.定义、初始化
+vector<T> v;
+vector<T> v(v2);
+vector<T> v = v2;
+vector<T> v(n);
+vector<T> v(n, val);
+vector<T> v{a, b, c, ...}		//列表初始化
+vector<T> v = {a, b, c, ...}

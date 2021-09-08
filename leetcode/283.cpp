@@ -1,0 +1,38 @@
+/*移动零
+给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+
+示例:
+输入: [0,1,0,3,12]
+输出: [1,3,12,0,0]
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/move-zeroes
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+*/
+
+#include <vector>
+
+using namespace std;
+
+//                              2021/7/23
+void question_283(vector<int>& nums) {
+    int left = 0;
+    //找到第一个0
+    for(left; left < nums.size(); ++left){
+        if(nums[left] == 0)
+            break;
+    }
+
+    int right = left + 1;
+    while (right < nums.size()) {
+        if(nums[right]){
+//            nums[left] =nums[right];
+            swap(nums[left], nums[right]);
+            ++left;
+        }
+        ++right;
+    }
+
+//    for(left; left < nums.size(); ++left)
+//        nums[left] = 0;
+}

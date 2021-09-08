@@ -1,0 +1,36 @@
+#include <string>	using std::string
+1.定义、初始化
+string str;
+string str = "Hello World!";		//拷贝初始化
+string str("Hello World!");		//直接初始化
+string str = s;
+string str(s);
+string str(n, 'c');		//n个字符c组成的字符串
+
+2.string操作
+os << str 			//写字符串
+is >> str			//读字符串
+getline(is, str)		//从流中读取一行，写入str ，返回is
+s1 + s2			//字符串连接
+str[n]			//返回第n个字符的引用
+str.empty()		//是否为空
+str.size()			//字符串中字符个数
+
+3.char处理
+#include <cctype>
+isalnum(c)		//c为字母或数字时为真
+isalpha(c)			//c为字母时为真
+isdigit(c)			//c为数字时为真
+iscntrl(c)			//c为控制字符时为真
+islower(c)			//c为小写字母时为真
+isupper(c）		//c为大写字母时为真
+tolower(c)		//返回c小写字母
+toupper(c)		//返回c大写字母
+
+4.c风格字符串
+字符串存放在数组中，并以空字符结尾('\0')
+#include <cstring>
+strlen(str)			//返回str长度(不计入空字符
+strcmp(str1, str2)		//比较相等性，str1 == str2  return 0;    str1 < str2  return -a;    str1 > str2  return a;
+strcat(str1, str2)		//str2附加在str1之后
+strcpy(str1, str2)		//str2拷贝给str1，返回str1

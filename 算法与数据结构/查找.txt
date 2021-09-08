@@ -1,0 +1,2 @@
+一、二分查找
+关键在于运行中的区间边界处理，比较left与right是<还是<=，下一轮是left = mid还是mid + 1，还有计算mid时，用mid = left + (right - left) / 2，而不是mid = (left + right) / 2，以免超出数据限制。
