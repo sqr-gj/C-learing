@@ -1,0 +1,11 @@
+1.采用下划线形式
+2.函数中不会改变的变量，定义为const
+
+计数	cnt
+临时变量   temp
+左右指针	left	right
+二分法	left	mid	right
+返回结果	result
+字符串	str_num
+字符	c
+指针	cp，ptr_对象

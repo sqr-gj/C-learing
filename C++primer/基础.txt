@@ -5,7 +5,10 @@ int\float\double\bool\char 等
 是否带符号  前置unsigned  (eg...  unsigned int)
 3.类型转换
 自动转换及强制转换
-强制：(int)...
+强制：(int) expr    	int (expr)
+显式转换	cast-name<type>(expression)
+const_cast	去除const性质(仅改变底层const)	不能改变类型
+static_cast	强制转换类型	不能改变const
 4.转义字符
 换行\n、制表符\t、引号\"......
 5.字符串
@@ -36,3 +39,74 @@ decltype((variable))双层括号结果永远是引用
 
 13.命名空间std
 using声明    using std::cin   \   using namespace std
+14.左值  右值
+对象	对象的值
+15.运算符
+/ 除法  	% 求余
+++i与i++
+16.条件表达式
+cond ? expr1 : expr2	cond为真时，返回expr1，否则返回expr2
+17.位运算符
+& 位与	^位异或	 | 位或 	~ 位求反
+移位    << 左移	>> 右移
+18.sizeof
+sizeof (type)
+sizeof expr	返回表达式或类型所占的字节数
+19.switch语句
+switch (ch) : {
+	case ch1 : 
+		...
+		break;
+	case ch2 :
+		...
+		break;
+	...
+	(default :
+		...
+	)
+}
+20.goto语句
+goto label;	跳转到label语句处
+label :
+	...
+21.异常处理
+try 与 throw
+try {
+	...
+}catch( ) {
+	...
+}
+throw 抛出异常
+22.static局部静态对象
+将局部变量定义位局部静态对象，第一次经过其定义语句时定义，直到程序结束时才销毁	不会因为所在块结束而销毁
+23.函数声明定义
+声明于头文件，定义于源文件， 	源文件应包含头文件，以验证声明与定义是否匹配
+24.参数传递
+引用传递与值传递
+使用引用避免拷贝、指针
+25.
+*ptr[10]	含有10个指针的数组
+(*ptr)[10]	指向含有10个元素的数组
+引用同
+
+26.尾置返回类型
+auto func(...) -> int (*)[]	->后接返回类型
+27.函数重载
+同名不同参	执行的操作相似	（例如对不同类型的参数进行比较等)
+28.默认实参
+调用时只能忽略尾部的实参	所以默认实参置于右侧
+29.内联函数inline
+避免函数调用时产生的额外开销		适用于规模较小、频繁调用、流程直接的函数	内联函数通常定义在头文件中
+30.预处理器
+#include <cassert>	  assert(expr)
+预处理器定义的名字：_ _func_ _	存放函数名字
+		  _ _FILE_ _	存放文件名
+		  _ _LINE_ _	存放当前行号
+		  _ _TIME_ _	存放编译时间
+		  _ _DATE_ _	存放编译日期
+31.函数指针
+声明函数指针时仅用指针代替函数名	
+bool lengthCompare(const string &, const string %);
+bool (*ptr)(const string &, const string %);
+ptr = lengthCompare;
+使用指向函数的指针，可以向其他函数传递该指针调用所指向的函数
