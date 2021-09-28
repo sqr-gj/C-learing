@@ -1,0 +1,18 @@
+1.
+#include <stack>     栈：先进后出	push(), pop(), top()
+#include <queue>队列：先进先出	push(), pop(), front(), back()
+属容器适配器，默认底层以deque实现 
+递归以栈实现   ——>（以栈实现递归
+2.链表
+单链表、双链表、循环链表
+struct ListNode {
+    int val;  // 节点上存储的元素
+    ListNode *next;  // 指向下一个节点的指针
+    ListNode(int x) : val(x), next(NULL) {}  // 节点的构造函数
+};
+
+3.二叉树
+满二叉树、完全二叉树、二叉排序树
+数组存储二叉树时：左孩子为2i+1、右孩子为2i+2(根结点为0
+遍历：深度--前序、中序、后序 
+           广度--层序

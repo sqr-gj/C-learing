@@ -15,3 +15,11 @@ a##b  翻译为ab	可用于两个符号连接为一个符号  创建标识符
 宏定义约定为名字全部大写
 7.#undef
 移除宏定义
+8.条件编译
+#if	#endif	#elif	#else
+#ifdef	#ifndef
+9.头文件中应该只包含一组函数或数据的声明	(每次#include 都有些额外开销
+10.避免多重包含	
+#ifndef
+#define
+#endif
