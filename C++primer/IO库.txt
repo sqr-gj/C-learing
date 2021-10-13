@@ -1,0 +1,18 @@
+#include <iostream>	流中读写
+#include <fstream>	文件中读写
+#include <sstream>	string中读写
+
+后面两个类继承自第一个类
+检查流的状态：P279	    流状态  iostate{badbit、failbit、eofbit、goodbit}	eof(), fail(), bad(), good() ...
+输出缓冲	设备写操作耗时较大，将数据存储于缓冲区，集中进行设备写操作	刷新缓冲区---flush  endl   ends
+
+文件读写：
+fstream ftrm()\ftrm(s)\ftrm(s,mode)
+open()
+close()
+is_open()
+
+文件模式： in  out   app  ate  trunc  binary	out模式会截断文件，若需保留，则同时指定app模式
+
+string流：
+sstream strm()\strm(s)
