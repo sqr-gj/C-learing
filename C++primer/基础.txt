@@ -110,3 +110,8 @@ bool lengthCompare(const string &, const string %);
 bool (*ptr)(const string &, const string %);
 ptr = lengthCompare;
 使用指向函数的指针，可以向其他函数传递该指针调用所指向的函数
+
+32.swap	
+swap(a, b)			//交换元素	统一使用非成员版本的swap
+a.swap(b)		//仅容器还是都可？
+除array外  swap对容器仅交换俩容器内部数据结构

@@ -1,3 +1,11 @@
+顺序容器： 
+vector 可变大小数组     	随机访问		使用较广
+array   固定大小数组		随机访问
+string  专门用于保存字符	随机访问
+deque  双端队列		随机访问
+list    双向链表		顺序访问		需要在中间插入删除时使用
+forward_list   单向链表	仅单向顺序访问
+
 #include <vector>	using std::vector
 类模板	vector<type> v;
 1.定义、初始化
@@ -8,3 +16,76 @@ vector<T> v(n);
 vector<T> v(n, val);
 vector<T> v{a, b, c, ...}		//列表初始化
 vector<T> v = {a, b, c, ...}
+vector<T> v(b, e)		//用迭代器初始化，b、e为迭代器，   左闭右开取值
+
+array使用时还需要指定大小	array<type, size_t>		内置数组（type a[size_t]）不支持拷贝、array支持
+
+容器复制拷贝需要类型匹配
+
+C---代指某容器或其对象
+2.迭代器
+（指针）以解引用访问元素	除forward_list不支持--操作
+c.begin()	c.cbegin()  c.rbegin()	//获取指向容器首尾的迭代器，前缀c为const，r为reverse反向取
+c.end()  c.cend()  c.rend()
+
+一些操作：
+c.size()			//返回容器大小
+c.empty()			//判断c是否为空
+c.clear()			//删除c中所有元素  返回void
+c.swap(c1)		//交换容器，统一使用非成员版本的swap较好  即swap(c1, c2)
+c.resize()			//改变容器大小  第一个参数指定改变后的大小，第二个参数可选，表示新添加元素的初始值
+
+c.assign(b, e)\(n, val)		//用b  e指定范围元素替换c中元素    实现不同类型容器间的数据交换（前提是元素类型相容   char---> string）
+
+容器比较    元素类型应支持比较操作
+
+3.
+添加：   vector  string不支持pop\push_front()	除array和forward_list均支持push_back()		push_back\front()提供首尾位置的快速插入，insert()提供任意位置的插入	vector等可以利用insert来在头部插入元素，但随之而来的是效率下降
+c.push_back(t)	c.push_front(t)
+c.emplace_back(args)     c.emplace_front(args)		emplace利用args创建元素添加到容器中
+c.emplace(p, args)	在迭代器p指向的元素之前添加元素t，返回指向新添加元素的迭代器
+
+c.insert()		(p, t)同上
+		(p, n, t)在迭代器p指向的元素之前添加n个元素t，返回指向新添加第一个元素的迭代器
+		(p, b, e)在迭代器p指向的元素之前添加b e指定范围的元素，返回指向新添加第一个元素的迭代器
+		(p, il)在迭代器p指向的元素之前添加il包含的元素，返回指向新添加第一个元素的迭代器   il为花括号包围的元素值列表
+
+删除：  
+c.pop_back()	c.pop_front()
+c.erase(p)		删除p指定的元素，返回指向被删元素之后元素的迭代器
+c.erase(b, e)	删除b, e指定范围的元素，返回指向最后一个被删元素之后元素的迭代器
+c.clear()		删除c中的所有元素
+
+访问：
+c.front()   c.back()	返回c中首尾元素的引用
+c[n]	c.at(n)	返回c中下标为n的元素的引用，当n越界，[] 行为未定义  at() 抛出out_of_range异常
+
+forward_list定义一套独有的添加删除操作
+insert_after()
+emplace_after()
+erase_after()
+
+4.与容量相关  内存
+c.capacity()	//c可以保存多少元素
+c.reserve(n)	//分配至少容纳n个元素的内存空间
+c.shrink_to_fit()	//将capacity()减少为与size()相同大小
+
+5.适配器	使某种事物的行为看起来像另外一种事物	
+stack	queue	priority_queue
+实现时可指定底层容器类型	stack  queue默认以deque实现   priority_queue以vector实现
+stack<string, vector<string>>  str_stk;
+
+栈stack    先进后出	
+pop()   push(t)	推出/压入栈顶
+top()		返回栈顶元素  不推出
+
+队列queue  先进先出
+pop()     		返回首元素
+push()		尾部插入
+front()
+back()		首尾元素
+
+优先队列priority_queue    （头文件为queue）
+top()		返回最高优先级元素  不删除
+pop()		推出最高优先级元素   不返回
+push()  emplace()    合适位置添加元素
