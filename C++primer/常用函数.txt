@@ -1,0 +1,11 @@
+find(b, e, val)		//迭代器范围内查找元素，返回指向val的迭代器   未找到则返回 c.end()
+count(b, e, val)		//返回范围内val出现的次数
+accumulate(b, e, init)	//对范围内元素求和，第三个参数为初始值
+
+fill(b, e, val)		//将val赋予范围内每个元素
+
+copy(b, e, b2)		//将范围内元素拷贝到b2起始的容器中
+replace(b, e, val1, val2)	//将范围内等于val1的值替换为val2
+
+sort(b, e)			//排序
+unique(b, e)		//使范围前部为不重复元素	返回指向不重复区域后一个位置的迭代器

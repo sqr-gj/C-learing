@@ -115,3 +115,37 @@ ptr = lengthCompare;
 swap(a, b)			//交换元素	统一使用非成员版本的swap
 a.swap(b)		//仅容器还是都可？
 除array外  swap对容器仅交换俩容器内部数据结构
+
+33.泛型算法	#include <numeric>
+实现一些经典算法的公共接口，可以用来处理不同类型的数据
+使用一对迭代器指定操作范围
+
+34.插入迭代器  #include <iterator>
+auto iter = back_inserter(c)  		//返回与容器c绑定的插入迭代器
+*iter = val;		//val插入到c的末尾
+
+35.谓词		函数？
+一元谓词	二元谓词
+可调用表达式	返回结果可用作条件
+sort(b, e, is_shorter)			//is_shorter为二元谓词	bool is_short(const string &s1, ...s2) { return s1.size() < s2.size();}   按长度排序   自定义比较方式
+
+36.lambda表达式		可以接受多个参数  脱离谓词一元二元限制
+[capture list] (parameter list) -> return type { function body}
+捕获列表 	       参数列表	     返回类型	函数体
+捕获列表：lambda所在函数中定义的局部变量
+必须使用尾置返回指定返回类型
+参数列表和返回类型可省略		auto f = [] { return val;}	f() 返回val
+
+值捕获  引用捕获	[val]	[&val]
+隐式捕获	=指定值捕获	&指定引用捕获
+混合隐式显式捕获	[=\&, list]		第一个参数必须为&或=
+
+37.bind函数	#include <functional>
+auto new_callable = bind(callable, args_list);
+生成新的可调用对象，调用new时，new调用callable，并传入args_list，相当于调用callable(args_list)	args中可能有_1, _n形式的参数，表示传入new的第n个参数
+_n定义在placeholders命名空间		使用前声明	using namespace placeholders;
+auto g = bind(f, a, b, _1, c, _2);	调用g(i, j) 等价于调用  f(a, b, i, c, j)
+
+38.ref函数		#include <functional>
+ref(k)		//返回k的引用
+cref(k)		//返回const引用
