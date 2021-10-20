@@ -89,3 +89,17 @@ back()		首尾元素
 top()		返回最高优先级元素  不删除
 pop()		推出最高优先级元素   不返回
 push()  emplace()    合适位置添加元素
+
+6.其他迭代器	#include <iterator>
+插入迭代器: 绑定到某容器，向容器内插入元素	insert(c)	返回与c绑定的对应迭代器
+back_inserter	尾后插入
+front_inserter	头部插入
+inserter		接受第二个参数(迭代器)  指向给定容器，插入到给定迭代器之前
+
+流迭代器：需要指定读写对象类型
+istream_iterator	istream_iterator<T> it(cin...)	it绑定到cin...	未初始化表示尾后位置
+ostream_iterator	ostream_iterator<T> it(os, (d))  可选参数d表示每写一个值后面输出一个d   it = val;     val写入os	可忽略解引用和递增操作
+*it  返回流中的值
+
+反向迭代器：前缀r
+rbegin()   rend()
