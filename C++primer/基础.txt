@@ -165,3 +165,37 @@ _copy
 40.链表特有操作	
 单独定义sort  merge  reverse......
 splice
+
+41.动态内存   智能指针		#include <memory>
+动态内存管理	new 分配空间并返回指向该对象的指针    delete  接受动态对象的指针 并销毁该对象
+智能指针（模板类）   用来管理动态对象   可自动释放所指对象		行为与普通指针类似  只是方便管理动态内存
+shared_ptr<T> p;		//允许多个指针指向同一个对象		空智能指针
+unique<T> p;		//只能该指针指向其对象
+
+make_shared<T> (args) 	//返回shared_ptr   指向args所构建对象
+shared_ptr<T> p (q);	//p为q的拷贝，递增q的计数器		可以使用new来初始化智能指针	p(new type(val))	但不能p = new type(val)  内置指针不能隐式转换为智能指针
+p = q			//递减p引用计数，递增q引用计数        
+
+shared_ptr    赋新值或离开作用域时，引用计数递减   引用计数为0时释放对象
+
+直接管理		new       delete		调用者需要自行delete
+new type		//创建一对象  返回指向该对象的指针	可列表初始化{ }    也可值初始化( )
+delete  p;		//p必须指向动态分配的内存
+	
+p.reset((q))	//重置p或p指向q
+
+u.release()	//放弃对指针的控制权 返回指针		可以将指针所有权转移	p(u.release())
+
+weak_ptr		//指向share_ptr控制的对象但不改变p的引用计数	可用来防止访问不存在对象且不影响对象的生存期
+w.lock()		//返回指向w对象的share_ptr   若为空  返回空p
+
+42.动态数组	
+new type[sz]	//分配sz个type  返回指向第一个对象的指针
+delete [] p
+
+43.allocator类	#include <memory>
+allocator<T> alloc;		//可以分配T类型的对象
+a.allocate(n);		//分配一段内存  保存n个T的对象
+a.construct(p, args);		//在p所指内存中构造一个对象     以args初始化
+a.destroy(p);		//析构p所指对象    p为T*类
+a.deallocator(p, n);		//释放p开始的保存了n个对象的内存

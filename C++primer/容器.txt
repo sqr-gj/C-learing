@@ -70,8 +70,8 @@ c.capacity()	//c可以保存多少元素
 c.reserve(n)	//分配至少容纳n个元素的内存空间
 c.shrink_to_fit()	//将capacity()减少为与size()相同大小
 
-5.适配器	使某种事物的行为看起来像另外一种事物	
-stack	queue	priority_queue
+适配器	：stack	queue	priority_queue
+使某种事物的行为看起来像另外一种事物
 实现时可指定底层容器类型	stack  queue默认以deque实现   priority_queue以vector实现
 stack<string, vector<string>>  str_stk;
 
@@ -90,7 +90,7 @@ top()		返回最高优先级元素  不删除
 pop()		推出最高优先级元素   不返回
 push()  emplace()    合适位置添加元素
 
-6.其他迭代器	#include <iterator>
+5.其他迭代器	#include <iterator>
 插入迭代器: 绑定到某容器，向容器内插入元素	insert(c)	返回与c绑定的对应迭代器
 back_inserter	尾后插入
 front_inserter	头部插入
@@ -103,3 +103,51 @@ ostream_iterator	ostream_iterator<T> it(os, (d))  可选参数d表示每写一�
 
 反向迭代器：前缀r
 rbegin()   rend()
+
+关联容器 ：map   set  multimap  multiset	无序  前缀  unordered_	以哈希存储    unordered_map
+#include <map>	#include <set>
+#include <unordered_map>	#include <unordered_set>
+map	键--值	实现关系的映射			...map<type1, type2>		map元素为pair类型(定义在 #include <utility>)
+set	键	便于查找关键字是否在容器内		...set<type>
+
+有序容器的关键字必须定义比较操作
+
+6.pair操作
+定义 初始化：
+pair<T1, T2> p;
+pair<T1, T2> p(v1, v2);
+pair<T1, T2> p = {v1, v2};
+make_pair(v1, v2);		//返回v1  v2  初始化的pair
+p.first   p.second	返回p的第一个   第二个元素
+
+关联容器中关键字不可改变
+
+7.添加  删除元素
+c.insert(val)	c.insert(p, val)      //值初始化    p处插入	  若插入的关键字已经在容器内 则不进行任何操作（multi  均插入）	返回pair  指向具有指定关键字的元素及是否插入成功的bool值
+c.insert(b, e)	//迭代器进行初始化
+c.insert(il)		//列表初始化
+
+c.emplace((p), args)
+
+c.erase(k)		//删除关键字为k的元素     返回size_type  标志删除元素的数量
+c.erase(p)		//删除p指向的元素  返回p之后元素的迭代器
+c.erase(b, e)	//删除b e 之间的元素   返回e
+
+8.下标操作    map
+c[k]		//返回关键字为k的值     k不在c中时添加k  并进行值初始化
+c.at(k)		//访问关键字为k的值     k不在时  抛出out_of_range异常 （不添加）
+
+9.元素访问
+c.find(k)		//返回指向关键字为k的迭代器    k不在时返回尾后迭代器
+c.count(k)		//返回关键字为k的元素的数量		（用来检查元素是否存在c中）		或者用c.find(k) == c.end()
+
+c.lower_bound(k)	//返回指向第一个不小于k的元素的迭代器
+c.upper_bound(k)	//返回指向第一个大于k的元素的迭代器
+
+c.equal_range(k)	//返回迭代器pair  表示关键字等于k的元素范围      (k不存在返回<c.end(), c.end()>
+
+无序容器   存储组织上为一组桶		元素存储在一个桶中   每个桶存储一定数量元素   访问时先由哈希函数计算出在哪个桶   再在桶中进行遍历
+c.bucket_count()		//正在使用的桶的数目
+c.max_bucket_count()	//容器能容纳最多的桶的数量
+c.bucket_szie(n)		//第n个桶中有多少元素
+c.bucket(k)		//关键字k在哪个桶
