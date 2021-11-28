@@ -35,36 +35,36 @@ candidates 中的数字可以无限制重复被选取。如果至少一个所选
 using namespace std;
 
 //
-void combine_(vector<int> candidates, int target, vector<vector<int>> &result, vector<int> &re) {
-    int sz = candidates.size();
-    if (sz == 0 || candidates[0] > target)
-        return;
+//void combine_(vector<int> candidates, int target, vector<vector<int>> &result, vector<int> &re) {
+//    int sz = candidates.size();
+//    if (sz == 0 || candidates[0] > target)
+//        return;
 
-    for (int i = 0; i < sz; ++i) {
-        if (candidates[i] == target) {              //相等即找到一组
-            re.push_back(candidates[i]);
-            result.push_back(re);
-            re.pop_back();
-            return;
-        }
-        else if (candidates[i] < target) {          //小于则可能再增加一位数或增大当前数
-            re.push_back(candidates[i]);
-            combine_(vector<int>(candidates.begin() + i, candidates.end()), target - candidates[i], result, re);    //can从i开始防止重复
-            re.pop_back();
-        }
-        else {                  //can已经排序，故当当前数大于tar时  后面数不可能组合完成
-            return;
-        }
-    }
-}
+//    for (int i = 0; i < sz; ++i) {
+//        if (candidates[i] == target) {              //相等即找到一组
+//            re.push_back(candidates[i]);
+//            result.push_back(re);
+//            re.pop_back();
+//            return;
+//        }
+//        else if (candidates[i] < target) {          //小于则可能再增加一位数或增大当前数
+//            re.push_back(candidates[i]);
+//            combine_(vector<int>(candidates.begin() + i, candidates.end()), target - candidates[i], result, re);    //can从i开始防止重复
+//            re.pop_back();
+//        }
+//        else {                  //can已经排序，故当当前数大于tar时  后面数不可能组合完成
+//            return;
+//        }
+//    }
+//}
 
-//                                          2021/10/20
-vector<vector<int>> question_39(vector<int>& candidates, int target) {
-    vector<vector<int>> result;
-    sort(candidates.begin(), candidates.end());
-    if (candidates[0] > target)
-        return result;
-    vector<int> re;
-    combine_(candidates, target, result, re);
-    return result;
-}
+////                                          2021/10/20
+//vector<vector<int>> question_39(vector<int>& candidates, int target) {
+//    vector<vector<int>> result;
+//    sort(candidates.begin(), candidates.end());
+//    if (candidates[0] > target)
+//        return result;
+//    vector<int> re;
+//    combine_(candidates, target, result, re);
+//    return result;
+//}

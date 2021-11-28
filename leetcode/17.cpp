@@ -51,7 +51,7 @@ void add_string(vector<string> &result, int num) {
 }
 
 //                                  2021/10/19
-vector<string> letterCombinations(string digits) {
+vector<string> question_17(string digits) {
     int sz = digits.size();
     vector<string> result;
     if (sz == 0)

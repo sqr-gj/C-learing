@@ -54,7 +54,7 @@ void combine_(int k, int n, int i, vector<vector<int>> &result) {
     }
 }
 //  接口函数                2021/10/19
-vector<vector<int>> combinationSum3(int k, int n) {
+vector<vector<int>> question_216(int k, int n) {
     vector<vector<int>> result;
     if(k == 0)
         return result;

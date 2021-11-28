@@ -42,5 +42,21 @@ bool combine(vector<int> nums, int sum_nums, int sum_now) {
 bool canPartition(vector<int>& nums) {
 //    sort(nums.begin(), nums.end());
 //    return combine(nums, accumulate(nums.begin(), nums.end(), 0), 0);
-
+    int sum = accumulate(nums.begin(), nums.end(), 0);
+    if (sum % 2)
+        return false;
+    vector<int> dp(sum / 2 + 1);
+    int target = sum / 2;
+    int sz = nums.size();
+    sum = 0;
+    for (int i = 0; i < sz; ++i) {
+        sum += nums[i];
+        for (int j = target; j > 0; --j) {
+            if (j >= nums[i])
+                dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]);
+        }
+        if (dp[target] == target)
+            return true;
+    }
+    return false;
 }

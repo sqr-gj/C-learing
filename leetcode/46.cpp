@@ -19,39 +19,65 @@
 */
 
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
 //                                  2021/8/24
-vector<vector<int>> question_46(vector<int>& nums) {
-    vector<vector<int>> re;
-    if(nums.size() == 1){
-        re.push_back(nums);
-        return re;
-    }
-    int sz = nums.size();
-    vector<vector<int>> r;
-    for(int i = sz - 1; i >= 0; --i){
-        int pop = nums[i];
-        nums.pop_back();
-        r = question_46(nums);
+//vector<vector<int>> question_46(vector<int>& nums) {
+//    vector<vector<int>> re;
+//    if(nums.size() == 1){
+//        re.push_back(nums);
+//        return re;
+//    }
+//    int sz = nums.size();
+//    vector<vector<int>> r;
+//    for(int i = sz - 1; i >= 0; --i){
+//        int pop = nums[i];
+//        nums.pop_back();
+//        r = question_46(nums);
 
-        for(int j = 0; j < sz; ++j){        //将pop出的元素插入第j个位置上
-            for(int k = 0; k < r.size(); ++k){
-                vector<int> a = r[k];
-                vector<int> add(sz);
+//        for(int j = 0; j < sz; ++j){        //将pop出的元素插入第j个位置上
+//            for(int k = 0; k < r.size(); ++k){
+//                vector<int> a = r[k];
+//                vector<int> add(sz);
 
-                for(int m = 0; m < sz; ++m){
-                    if(m < j)
-                        add[m] = a[m];
-                    else if(m == j)
-                        add[j] = pop;
-                    else
-                        add[m] = a[m - 1];
-                }
-                re.push_back(add);
-            }
-        }
-    }
-    return re;
-}
+//                for(int m = 0; m < sz; ++m){
+//                    if(m < j)
+//                        add[m] = a[m];
+//                    else if(m == j)
+//                        add[j] = pop;
+//                    else
+//                        add[m] = a[m - 1];
+//                }
+//                re.push_back(add);
+//            }
+//        }
+//    }
+//    return re;
+//}
+
+//
+//void arr_nums(vector<int> nums, vector<int> pre_nums, vector<vector<int>> &result) {
+//    int sz = nums.size();
+//    if (sz == 1) {
+//        pre_nums.push_back(nums[0]);
+//        result.push_back(pre_nums);
+//        return;
+//    }
+
+//    for (int i = 0; i < sz; ++i) {
+//        pre_nums.push_back(nums[i]);
+//        swap(nums[0], nums[i]);
+//        arr_nums(vector<int> (nums.begin() + 1, nums.end()), pre_nums, result);
+//        pre_nums.pop_back();
+//    }
+//}
+
+////回溯                        2021/10/26
+//vector<vector<int>> question_46(vector<int>& nums) {
+//    vector<vector<int>> result;
+//    vector<int> pre;
+//    arr_nums(nums, pre, result);
+//    return result;
+//}

@@ -4,7 +4,148 @@ show tables;		//显示当前数据库的表
 show columns from table_name;	//显示表table_name 的列     （不是数据  仅是表每列的定义
 
 select columns_name1,name2,name3...  from table_name;	//选择表table_name的列columns_namei
-当columns_name为*时   选择表中的所有列
+当columns_name为 * 时   选择表中的所有列
 columns_name 前缀关键字distinct  返回所选列的不同行
 表名table_name 后缀 limit i, j	（= limit j offset i)	//返回从行i开始的j行  ，只有i时返回前i行
 表名table_name 后缀 order by columns_name	//返回按列columns_name 排序数据  多个name时从前往后优先级降低	降序排列时需在name后缀关键字 desc
+
+where ...		=、 !=、<、>、<=、>=   指定两值之间    where between A and B	//筛选数据	
+where k is null		//空值检查
+where cond1 and\or cond2	//条件组合筛选	满足条件1且\或条件2	多个组合时使用括号使逻辑正确
+where k in (value1、value2...)		//筛选出指定范围内的数据
+where k not in (value1、value2...)	//not进行取反    not可对in  between   exist等进行取反操作	
+
+通配符	使用 like  指明按通配符匹配	(搜索效率较低  谨慎使用)
+% 任何字符出现任意次数	：	%aad% (cccccaadcccc)	%aad (cccccccaad)    aad% (aadccccccc)
+_   只匹配单个字符		：	_aad_ (caadc)	......
+
+正则表达式	使用 regexp  指明使用正则表达式匹配
+.	匹配任意一个字符(与通配符_一样？
+|	或      a|b  匹配a或b都返回
+[]	[abc] == a|b|c	匹配括号内的任一字符
+^	否	[^abc]	匹配除括号内字符以外的字符	仅在括号中使用表示否定
+-	匹配范围	[a-z] [0-9]
+	匹配特殊字符(.  | [ ] ^ 等等)	使用\\.    \\|  ......
+[:alnum:]		匹配字符类      alnum---任意字符和数字
+			       alpha--- 任意字符
+			       digit ---  任意数字	......
+匹配多个实例
+	*	0或多个匹配
+	+	1或多个匹配
+	？	0或1个匹配
+	{n}	n个匹配
+	{n,}	不少于n个匹配
+	{n,m}	n-m个匹配
+[[:digit:]]{4}	匹配四个连续数字
+
+定位符	
+^	文本开头
+$	文本结尾
+
+
+计算字段		在select 后进行处理
+concat(a, b)	拼接数据a, b	ab
+rtrim(a)		删除数据右侧多余空格	ltrim(a) 删除左边	trim(a) 删除双边
++ - * / 		计算
+
+select 处理字段  as 别名	将处理字段按别名表示
+
+数据处理
+文本
+upper()		转换成大写
+lower()		转换成小写
+left()		返回字符串左边字符
+right()		返回字符串右边字符
+soundex()		返回符合字符串发音的字符串
+......
+
+数值
+abs()		绝对值
+exp()		指数值
+mod()		余数
+sqrt()		平方根
+......
+
+时间
+now()		返回当前日期时间
+curtime()		返回当前时间
+curdata()		返回当前日期(无此函数？？
+
+data()	time()	返回日期  时间部分
+year()   month()    day()   hour()  minute()  second()	返回日期的各部分
+dataofweek()	返回日期对应星期几
+
+数据汇总
+avg()		列均值
+sum()		列总和
+max()		列最大值
+min()		列最小值
+count()		指定某列计列的数 忽略Null  不指定返回总行数 count(*)
+
+联结表
+inner join		内部联结(默认
+left join		外部联结(left outer join \ right outer join  	left包含左表所有行
+
+组合查询
+union		不同查询必须包含相同列
+union all
+
+全文本搜索
+match() against()
+in boolean mode	布尔模式	布尔操作符
+
+update		//更新表 
+delete		//删除表
+
+创建表
+creat table (if not exists) name (...)
+primary key (...)	//主键
+auto_increment	//自动增量
+default		//默认值
+engine = 		//设置引擎（innoDB   MEMORY   MyISAM
+
+删除表
+drop table name
+
+rename tabel name to name_new;	//重命名
+
+视图 	（相当于将多个表联结在一起----不存储数据
+create view name
+drop view name
+create or replace view
+
+存储过程		函数？？？
+create procedure name ()
+begin 
+         ...
+end
+
+智能处理单一变量？
+
+()中变量以@开始
+out  in  inout     指定参数
+
+declare	声明局部变量
+
+游标  (仅用于存储过程
+declare name cursor
+for
+select ... 
+
+fetch cursor ...			//fetch使用游标  检索出游标当前行后移动到下一行
+
+判断语句
+if ... then  
+	.... 
+elseif then
+	 ... 
+else 
+	... 
+end if
+
+循环语句
+repeat
+	...
+until ... end repeat
+
+delimiter   //	重定义分隔符，方便写函数时使用 ;
