@@ -120,6 +120,8 @@ begin
          ...
 end
 
+call name()	调用存储过程
+
 智能处理单一变量？
 
 ()中变量以@开始
@@ -127,7 +129,7 @@ out  in  inout     指定参数
 
 declare	声明局部变量
 
-游标  (仅用于存储过程
+游标  (仅用于存储过程	选取数据进行处理
 declare name cursor
 for
 select ... 
@@ -149,3 +151,19 @@ repeat
 until ... end repeat
 
 delimiter   //	重定义分隔符，方便写函数时使用 ;
+
+触发器	某事件发生时自动执行
+delete   insert   update   	仅这些语句触发
+create trigger name after/before delete/insert/update on tablename
+
+事务处理		一堆事件要么不处理要么全部处理
+start transaction	开始事务处理
+rollback  (to ...)		回退
+commit		提交
+savepoint name	方便回退到指定位置
+
+用户管理
+create user user.name (identified by user.password);
+set password for user.name = password('...');	更改密码
+grant 权限(select.insert...) on 数据库(test.*  *所有表    使用all  表示整个服务器) to 用户名;		授权
+revoke		撤销权限

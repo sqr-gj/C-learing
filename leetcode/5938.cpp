@@ -37,8 +37,8 @@ Difficulty:Easy
 
 using namespace std;
 
-//
-vector<int> targetIndices(vector<int>& nums, int target) {
+//                              2021/11/28
+vector<int> question_5938(vector<int>& nums, int target) {
       sort(nums.begin(), nums.end());
       int first = 0;
       vector<int> result;

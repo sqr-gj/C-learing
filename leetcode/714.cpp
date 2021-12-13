@@ -55,4 +55,14 @@ int question_714(vector<int>& prices, int fee) {
     if (next_max - now - fee > 0)
         cnt += next_max - now - fee;
     return cnt;
+    //dp                        2021/12/9
+//    int sz = prices.size();
+//    vector<vector<int>> dp(sz, vector<int>(2));
+//    dp[0][0] = -prices[0];
+//    for (int i = 1; i < sz; ++i) {
+//        dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
+//        dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + prices[i] - fee);
+//    }
+
+//    return dp[sz - 1][1];
 }

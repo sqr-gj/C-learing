@@ -56,4 +56,18 @@ int question_122(vector<int>& prices) {
     }
 
     return cnt;
+
+    //dp                        2021/12/4
+//    int sz = prices.size();
+//    vector<int> dp(sz);
+//    dp[0] = 0;
+//    int now = prices[0];
+//    for (int i = 1; i < sz; ++i) {
+//        if (now < prices[i])
+//            dp[i] = dp[i - 1] + prices[i] - now;
+//        else
+//            dp[i] = dp[i - 1];
+//        now = prices[i];
+//    }
+//    return dp[sz - 1];
 }
