@@ -19,6 +19,7 @@
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
 
+//题解: https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/solution/di-gui-hui-su-by-cao-mu-hui-d-lzj9/
 #include <vector>
 #include <string>
 
@@ -26,42 +27,68 @@ using namespace std;
 
 vector<string> num_char = {{}, {}, {"abc"}, {"def"}, {"ghi"}, {"jkl"}, {"mno"}, {"pqrs"}, {"tuv"}, {"wxyz"}};
 
-//将num对应字符加到string上
-void add_string(vector<string> &result, int num) {
-    string s = num_char[num];
-    int sz1 = s.size();
-    int sz2 = result.size();
-    if (sz2 == 0) {             //第一个数
-        for (int j = 0; j < sz1; ++j) {
-            string str;
-            str += num_char[num][j];
-            result.push_back(str);
-        }
+////将num对应字符加到string上
+//void add_string(vector<string> &result, int num) {
+//    string s = num_char[num];
+//    int sz1 = s.size();
+//    int sz2 = result.size();
+//    if (sz2 == 0) {             //第一个数
+//        for (int j = 0; j < sz1; ++j) {
+//            string str;
+//            str += num_char[num][j];
+//            result.push_back(str);
+//        }
+//        return;
+//    }
+//    for (int i = 0; i < sz2; ++i) {
+//        string str = result[i];
+//        for (int j = 0; j < sz1; ++j) {
+//            str += num_char[num][j];
+//            result.push_back(str);
+//            str.pop_back();
+//        }
+//    }
+//    result.erase(result.begin(), result.begin() + sz2);     //删除前n个字符串
+//}
+
+////                                  2021/10/19
+//vector<string> question_17(string digits) {
+//    int sz = digits.size();
+//    vector<string> result;
+//    if (sz == 0)
+//        return result;
+
+//    for (int i = 0; i < sz; ++i) {
+//        string c = "0";
+//        c[0] = digits[i];
+//        int num = stoi(c);
+//        add_string(result, num);
+//    }
+//    return result;
+//}
+
+//  k表示当前应该组合 digits 中的第 k 个字符
+void combine (string &digits, vector<string> &result, string &one_con, size_t k) {
+    if (k == digits.size()){                        //sz个字符全部组合完毕
+        result.push_back(one_con);
         return;
     }
-    for (int i = 0; i < sz2; ++i) {
-        string str = result[i];
-        for (int j = 0; j < sz1; ++j) {
-            str += num_char[num][j];
-            result.push_back(str);
-            str.pop_back();
-        }
+
+    string now_num = num_char[digits[k] - '0'];     //当前数字字符对应的字母
+    int sz = now_num.size();
+    for (int i = 0; i < sz; ++i) {
+        one_con[k] = now_num[i];                    //更新当前位置的字符
+        combine(digits, result, one_con, k + 1);
     }
-    result.erase(result.begin(), result.begin() + sz2);     //删除前n个字符串
 }
 
-//                                  2021/10/19
+//                                              2021/12/13
 vector<string> question_17(string digits) {
     int sz = digits.size();
     vector<string> result;
     if (sz == 0)
         return result;
-
-    for (int i = 0; i < sz; ++i) {
-        string c = "0";
-        c[0] = digits[i];
-        int num = stoi(c);
-        add_string(result, num);
-    }
+    string one_con(sz, ' ');                        //表示一种组合方式
+    combine(digits, result, one_con, 0);
     return result;
 }

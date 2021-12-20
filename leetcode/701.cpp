@@ -31,6 +31,9 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+//                                  2021/12/15
+//题解: https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/solution/di-gui-by-cao-mu-hui-d-utqb/
+
 //                              2021/10/15
 TreeNode* question_701(TreeNode* root, int val) {
     if (!root)

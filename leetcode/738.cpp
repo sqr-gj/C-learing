@@ -25,10 +25,11 @@
 
 using namespace std;
 
+//      2021/12/14
+//题解:https://leetcode-cn.com/problems/monotone-increasing-digits/solution/shi-tan-xin-ma-by-cao-mu-hui-d-uf21/
+
 //                          2021/11/10
 int question_738(int n) {
-    if (n < 10)
-        return n;
     string n_s = to_string(n);
     int sz = n_s.size();
     vector<char> all_num = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
@@ -42,7 +43,7 @@ int question_738(int n) {
         return n;
 
     int j = i;
-    for (; j >= 0; --j) {
+    for (; j > 0; --j) {
         if (n_s[j] > n_s[j - 1])
             break;
     }
